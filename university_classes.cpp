@@ -3,38 +3,32 @@
 // Book, Library, FoodItem, Cafeteria, and University classes.
 
 #include "university_classes.h" // Include the header with class declarations
-#include <iomanip>              // Required for std::fixed and std::setprecision
+#include <iomanip> // Required for std::fixed and std::setprecision
+#include <algorithm> // Required for std::transform
 
 // --- Helper Functions Implementations ---
 
-void clearInputBuffer()
-{
+void clearInputBuffer() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-std::string getStringInput(const std::string &prompt)
-{
+std::string getStringInput(const std::string& prompt) {
     std::string input;
     std::cout << prompt;
     std::getline(std::cin, input);
     return input;
 }
 
-int getIntegerInput(const std::string &prompt)
-{
+int getIntegerInput(const std::string& prompt) {
     int value;
-    while (true)
-    {
+    while (true) {
         std::cout << prompt;
         std::cin >> value;
-        if (std::cin.fail())
-        {
+        if (std::cin.fail()) {
             std::cout << "Invalid input. Please enter a number." << std::endl;
             std::cin.clear();
             clearInputBuffer();
-        }
-        else
-        {
+        } else {
             clearInputBuffer();
             return value;
         }
@@ -60,31 +54,26 @@ std::string Student::getPhoneNumber() const { return phoneNumber; }
 std::string Student::getEmail() const { return email; }
 std::string Student::getDepartment() const { return departmentEnrolled; }
 double Student::getCGPA() const { return CGPA; }
-const std::vector<std::string> &Student::getEnrolledCourseIDs() const { return enrolledCourseIDs; }
+const std::vector<std::string>& Student::getEnrolledCourseIDs() const { return enrolledCourseIDs; }
 std::string Student::getHSCResult() const { return hscResult; }
 std::string Student::getSSCResult() const { return sscResult; }
 
 void Student::setCGPA(double gpa) { CGPA = gpa; }
 
-void Student::enrollCourse(const std::string &courseID)
-{
+void Student::enrollCourse(const std::string& courseID) {
     bool alreadyEnrolled = false;
-    for (const std::string &id : enrolledCourseIDs)
-    {
-        if (id == courseID)
-        {
+    for (const std::string& id : enrolledCourseIDs) {
+        if (id == courseID) {
             alreadyEnrolled = true;
             break;
         }
     }
-    if (!alreadyEnrolled)
-    {
+    if (!alreadyEnrolled) {
         enrolledCourseIDs.push_back(courseID);
     }
 }
 
-void Student::displayStudentInfo() const
-{
+void Student::displayStudentInfo() const {
     std::cout << "\n--- Student Details ---" << std::endl;
     std::cout << "Student ID: " << studentID << std::endl;
     std::cout << "Name: " << name << std::endl;
@@ -97,14 +86,10 @@ void Student::displayStudentInfo() const
     std::cout << "SSC Result: " << sscResult << std::endl;
     std::cout << "CGPA: " << CGPA << std::endl;
     std::cout << "Enrolled Courses: ";
-    if (enrolledCourseIDs.empty())
-    {
+    if (enrolledCourseIDs.empty()) {
         std::cout << "None" << std::endl;
-    }
-    else
-    {
-        for (const std::string &courseID : enrolledCourseIDs)
-        {
+    } else {
+        for (const std::string& courseID : enrolledCourseIDs) {
             std::cout << courseID << " ";
         }
         std::cout << std::endl;
@@ -124,22 +109,13 @@ std::string Department::getHeadOfDepartment() const { return headOfDepartment; }
 int Department::getTotalFacultyCount() const { return totalFacultyCount; }
 int Department::getTotalStudentCount() const { return totalStudentCount; }
 
-void Department::setHeadOfDepartment(const std::string &hod) { headOfDepartment = hod; }
+void Department::setHeadOfDepartment(const std::string& hod) { headOfDepartment = hod; }
 void Department::incrementFacultyCount() { totalFacultyCount++; }
-void Department::decrementFacultyCount()
-{
-    if (totalFacultyCount > 0)
-        totalFacultyCount--;
-}
+void Department::decrementFacultyCount() { if (totalFacultyCount > 0) totalFacultyCount--; }
 void Department::incrementStudentCount() { totalStudentCount++; }
-void Department::decrementStudentCount()
-{
-    if (totalStudentCount > 0)
-        totalStudentCount--;
-}
+void Department::decrementStudentCount() { if (totalStudentCount > 0) totalStudentCount--; }
 
-void Department::displayDepartmentInfo() const
-{
+void Department::displayDepartmentInfo() const {
     std::cout << "\n--- Department Details ---" << std::endl;
     std::cout << "Department ID: " << departmentID << std::endl;
     std::cout << "Name: " << name << std::endl;
@@ -160,27 +136,22 @@ std::string Faculty::getName() const { return name; }
 std::string Faculty::getDepartment() const { return departmentAssigned; }
 std::string Faculty::getDesignation() const { return designation; }
 std::string Faculty::getEmail() const { return email; }
-const std::vector<std::string> &Faculty::getCoursesTaughtIDs() const { return coursesTaughtIDs; }
+const std::vector<std::string>& Faculty::getCoursesTaughtIDs() const { return coursesTaughtIDs; }
 
-void Faculty::assignCourse(const std::string &courseID)
-{
+void Faculty::assignCourse(const std::string& courseID) {
     bool alreadyAssigned = false;
-    for (const std::string &id : coursesTaughtIDs)
-    {
-        if (id == courseID)
-        {
+    for (const std::string& id : coursesTaughtIDs) {
+        if (id == courseID) {
             alreadyAssigned = true;
             break;
         }
     }
-    if (!alreadyAssigned)
-    {
+    if (!alreadyAssigned) {
         coursesTaughtIDs.push_back(courseID);
     }
 }
 
-void Faculty::displayFacultyInfo() const
-{
+void Faculty::displayFacultyInfo() const {
     std::cout << "\n--- Faculty Details ---" << std::endl;
     std::cout << "Faculty ID: " << facultyID << std::endl;
     std::cout << "Name: " << name << std::endl;
@@ -188,14 +159,10 @@ void Faculty::displayFacultyInfo() const
     std::cout << "Designation: " << designation << std::endl;
     std::cout << "Email: " << email << std::endl;
     std::cout << "Courses Taught: ";
-    if (coursesTaughtIDs.empty())
-    {
+    if (coursesTaughtIDs.empty()) {
         std::cout << "None" << std::endl;
-    }
-    else
-    {
-        for (const std::string &courseID : coursesTaughtIDs)
-        {
+    } else {
+        for (const std::string& courseID : coursesTaughtIDs) {
             std::cout << courseID << " ";
         }
         std::cout << std::endl;
@@ -215,8 +182,7 @@ std::string Course::getDepartmentOffering() const { return departmentOffering; }
 int Course::getCredits() const { return credits; }
 std::string Course::getCourseDescription() const { return courseDescription; }
 
-void Course::displayCourseInfo() const
-{
+void Course::displayCourseInfo() const {
     std::cout << "\n--- Course Details ---" << std::endl;
     std::cout << "Course ID: " << courseID << std::endl;
     std::cout << "Title: " << title << std::endl;
@@ -240,8 +206,7 @@ bool Book::getAvailability() const { return isAvailable; }
 
 void Book::setAvailability(bool available) { isAvailable = available; }
 
-void Book::displayBookInfo() const
-{
+void Book::displayBookInfo() const {
     std::cout << "  ID: " << bookID
               << ", Title: \"" << title << "\""
               << ", Author: " << author
@@ -250,96 +215,80 @@ void Book::displayBookInfo() const
 }
 
 // Library Class Implementations
-void Library::addBook(const Book &book)
-{
+void Library::addBook(const Book& book) {
     books.push_back(book);
 }
 
-void Library::displayAllBooks() const
-{
-    if (books.empty())
-    {
+void Library::displayAllBooks() const {
+    if (books.empty()) {
         std::cout << "\nNo books in the library yet." << std::endl;
         return;
     }
     std::cout << "\n--- All Books in Library ---" << std::endl;
-    for (const auto &book : books)
-    {
+    for (const auto& book : books) {
         book.displayBookInfo();
     }
     std::cout << "----------------------------" << std::endl;
 }
 
-void Library::searchBookByTitle() const
-{
+void Library::searchBookByTitle() const {
     std::string searchTerm = getStringInput("Enter Book Title to search: ");
     bool found = false;
     std::cout << "\n--- Search Results (Books by Title) ---" << std::endl;
     std::string searchTermLower = searchTerm;
     std::transform(searchTermLower.begin(), searchTermLower.end(), searchTermLower.begin(), ::tolower);
 
-    for (const auto &book : books)
-    {
+    for (const auto& book : books) {
         std::string bookTitleLower = book.getTitle();
         std::transform(bookTitleLower.begin(), bookTitleLower.end(), bookTitleLower.begin(), ::tolower);
-        if (bookTitleLower.find(searchTermLower) != std::string::npos)
-        {
+        if (bookTitleLower.find(searchTermLower) != std::string::npos) {
             book.displayBookInfo();
             found = true;
         }
     }
-    if (!found)
-    {
+    if (!found) {
         std::cout << "No book found with '" << searchTerm << "' in its title." << std::endl;
     }
     std::cout << "---------------------------------------" << std::endl;
 }
 
-void Library::searchBookByAuthor() const
-{
+void Library::searchBookByAuthor() const {
     std::string searchTerm = getStringInput("Enter Author Name to search: ");
     bool found = false;
     std::cout << "\n--- Search Results (Books by Author) ---" << std::endl;
     std::string searchTermLower = searchTerm;
     std::transform(searchTermLower.begin(), searchTermLower.end(), searchTermLower.begin(), ::tolower);
 
-    for (const auto &book : books)
-    {
+    for (const auto& book : books) {
         std::string authorNameLower = book.getAuthor();
         std::transform(authorNameLower.begin(), authorNameLower.end(), authorNameLower.begin(), ::tolower);
-        if (authorNameLower.find(searchTermLower) != std::string::npos)
-        {
+        if (authorNameLower.find(searchTermLower) != std::string::npos) {
             book.displayBookInfo();
             found = true;
         }
     }
-    if (!found)
-    {
+    if (!found) {
         std::cout << "No book found by author '" << searchTerm << "'." << std::endl;
     }
     std::cout << "----------------------------------------" << std::endl;
 }
 
-void Library::searchBookByGenre() const
-{
+void Library::searchBookByGenre() const {
     std::string searchTerm = getStringInput("Enter Genre to search (e.g., Fiction, Science, History): ");
     bool found = false;
     std::cout << "\n--- Search Results (Books by Genre) ---" << std::endl;
     std::string searchTermLower = searchTerm;
     std::transform(searchTermLower.begin(), searchTermLower.end(), searchTermLower.begin(), ::tolower);
 
-    for (const auto &book : books)
-    {
+    for (const auto& book : books) {
         std::string genreLower = book.getGenre();
         std::transform(genreLower.begin(), genreLower.end(), genreLower.begin(), ::tolower);
-        if (genreLower.find(searchTermLower) != std::string::npos)
-        {
+        if (genreLower.find(searchTermLower) != std::string::npos) {
             book.displayBookInfo();
             found = true;
         }
     }
-    if (!found)
-    {
+    if (!found) {
         std::cout << "No book found in genre '" << searchTerm << "'." << std::endl;
     }
     std::cout << "---------------------------------------" << std::endl;
@@ -354,8 +303,7 @@ std::string FoodItem::getName() const { return name; }
 double FoodItem::getPrice() const { return price; }
 std::string FoodItem::getCategory() const { return category; }
 
-void FoodItem::displayFoodItemInfo() const
-{
+void FoodItem::displayFoodItemInfo() const {
     std::cout << "  ID: " << itemID
               << ", Name: " << name
               << ", Price: " << std::fixed << std::setprecision(2) << price << " BDT"
@@ -363,79 +311,66 @@ void FoodItem::displayFoodItemInfo() const
 }
 
 // Cafeteria Class Implementations
-void Cafeteria::addMenuItem(const FoodItem &item)
-{
+void Cafeteria::addMenuItem(const FoodItem& item) {
     menuItems.push_back(item);
 }
 
-void Cafeteria::displayAllMenuItems() const
-{
-    if (menuItems.empty())
-    {
+void Cafeteria::displayAllMenuItems() const {
+    if (menuItems.empty()) {
         std::cout << "\nNo food items in the cafeteria menu yet." << std::endl;
         return;
     }
     std::cout << "\n--- All Cafeteria Menu Items ---" << std::endl;
-    for (const auto &item : menuItems)
-    {
+    for (const auto& item : menuItems) {
         item.displayFoodItemInfo();
     }
     std::cout << "--------------------------------" << std::endl;
 }
 
-void Cafeteria::searchMenuItemByName() const
-{
+void Cafeteria::searchMenuItemByName() const {
     std::string searchTerm = getStringInput("Enter Food Item Name to search: ");
     bool found = false;
     std::cout << "\n--- Search Results (Food Items by Name) ---" << std::endl;
     std::string searchTermLower = searchTerm;
     std::transform(searchTermLower.begin(), searchTermLower.end(), searchTermLower.begin(), ::tolower);
 
-    for (const auto &item : menuItems)
-    {
+    for (const auto& item : menuItems) {
         std::string itemNameLower = item.getName();
         std::transform(itemNameLower.begin(), itemNameLower.end(), itemNameLower.begin(), ::tolower);
-        if (itemNameLower.find(searchTermLower) != std::string::npos)
-        {
+        if (itemNameLower.find(searchTermLower) != std::string::npos) {
             item.displayFoodItemInfo();
             found = true;
         }
     }
-    if (!found)
-    {
+    if (!found) {
         std::cout << "No food item found with '" << searchTerm << "' in its name." << std::endl;
     }
     std::cout << "------------------------------------------" << std::endl;
 }
 
-void Cafeteria::searchMenuItemByCategory() const
-{
+void Cafeteria::searchMenuItemByCategory() const {
     std::string searchTerm = getStringInput("Enter Category to search (e.g., Main Course, Snack, Beverage): ");
     bool found = false;
     std::cout << "\n--- Search Results (Food Items by Category) ---" << std::endl;
     std::string searchTermLower = searchTerm;
     std::transform(searchTermLower.begin(), searchTermLower.end(), searchTermLower.begin(), ::tolower);
 
-    for (const auto &item : menuItems)
-    {
+    for (const auto& item : menuItems) {
         std::string categoryLower = item.getCategory();
         std::transform(categoryLower.begin(), categoryLower.end(), categoryLower.begin(), ::tolower);
-        if (categoryLower.find(searchTermLower) != std::string::npos)
-        {
+        if (categoryLower.find(searchTermLower) != std::string::npos) {
             item.displayFoodItemInfo();
             found = true;
         }
     }
-    if (!found)
-    {
+    if (!found) {
         std::cout << "No food item found in category '" << searchTerm << "'." << std::endl;
     }
     std::cout << "---------------------------------------------" << std::endl;
 }
 
 // University Class Method Implementations (excluding loadInitialData and run)
-void University::addAdmission()
-{
+void University::addAdmission() {
     std::cout << "\n--- Submit Admission Application ---" << std::endl;
     std::string studentName = getStringInput("Enter Student Name: ");
     std::string studentID = getStringInput("Enter Student ID: ");
@@ -449,15 +384,12 @@ void University::addAdmission()
     std::cout << "\nAdmission submitted successfully!" << std::endl;
 }
 
-void University::addStudent()
-{
+void University::addStudent() {
     std::cout << "\n--- Add New Student ---" << std::endl;
     std::string id = getStringInput("Enter Student ID: ");
 
-    for (const auto &s : students)
-    {
-        if (s.getStudentID() == id)
-        {
+    for (const auto& s : students) {
+        if (s.getStudentID() == id) {
             std::cout << "Error: Student with this ID already exists." << std::endl;
             return;
         }
@@ -477,99 +409,103 @@ void University::addStudent()
     std::cout << "Student added successfully!" << std::endl;
 
     auto it_dept = std::find_if(departments.begin(), departments.end(),
-                                [&](const Department &d)
-                                { return d.getName() == department; });
-    if (it_dept != departments.end())
-    {
+                                [&](const Department& d){ return d.getName() == department; });
+    if (it_dept != departments.end()) {
         it_dept->incrementStudentCount();
-    }
-    else
-    {
+    } else {
         std::cout << "Warning: Department '" << department << "' not found. Student count not updated." << std::endl;
     }
 }
 
-void University::displayAllStudents() const
-{
-    if (students.empty())
-    {
-        std::cout << "\nNo students registered yet." << std::endl;
+// --- UPDATED displayAllStudents() ---
+void University::displayAllStudents() const {
+    std::string deptName = getStringInput("Enter Department Name to display students from : ");
+
+    // Convert input department name to lowercase for case-insensitive comparison
+    std::string deptNameLower = deptName;
+    std::transform(deptNameLower.begin(), deptNameLower.end(), deptNameLower.begin(), ::tolower);
+
+    bool departmentFound = false;
+    for (const auto& d : departments) {
+        std::string currentDeptNameLower = d.getName();
+        std::transform(currentDeptNameLower.begin(), currentDeptNameLower.end(), currentDeptNameLower.begin(), ::tolower);
+        if (currentDeptNameLower == deptNameLower) {
+            departmentFound = true;
+            break;
+        }
+    }
+
+    if (!departmentFound) {
+        std::cout << "Error: Department '" << deptName << "' not found." << std::endl;
         return;
     }
-    std::cout << "\n--- All Registered Students ---" << std::endl;
-    for (const auto &student : students)
-    {
-        student.displayStudentInfo();
+
+    bool foundStudents = false;
+    std::cout << "\n--- All Students in " << deptName << " Department ---" << std::endl;
+    for (const auto& student : students) {
+        // Convert student's department name to lowercase for comparison
+        std::string studentDeptLower = student.getDepartment();
+        std::transform(studentDeptLower.begin(), studentDeptLower.end(), studentDeptLower.begin(), ::tolower);
+
+        if (studentDeptLower == deptNameLower) {
+            student.displayStudentInfo();
+            foundStudents = true;
+        }
     }
+    if (!foundStudents) {
+        std::cout << "No students registered in " << deptName << " yet." << std::endl;
+    }
+    std::cout << "---------------------------------------" << std::endl;
 }
 
-void University::searchStudent() const
-{
+void University::searchStudent() const {
     std::string studentID = getStringInput("Enter Student ID: ");
     std::string departmentName = getStringInput("Enter Student's Department: ");
     bool found = false;
     std::cout << "\n--- Search Results (Students) ---" << std::endl;
-    for (const auto &student : students)
-    {
-        if (student.getStudentID() == studentID && student.getDepartment() == departmentName)
-        {
+    for (const auto& student : students) {
+        if (student.getStudentID() == studentID && student.getDepartment() == departmentName) {
             student.displayStudentInfo();
             found = true;
             break;
         }
     }
-    if (!found)
-    {
+    if (!found) {
         std::cout << "No student found matching this ID and Department." << std::endl;
     }
 }
 
-void University::enrollStudentInCourse()
-{
+void University::enrollStudentInCourse() {
     std::string studentID = getStringInput("Enter Student ID to enroll in a course: ");
     auto it_student = std::find_if(students.begin(), students.end(),
-                                   [&](const Student &s)
-                                   { return s.getStudentID() == studentID; });
+                                   [&](const Student& s){ return s.getStudentID() == studentID; });
 
-    if (it_student != students.end())
-    {
+    if (it_student != students.end()) {
         std::string courseID = getStringInput("Enter Course ID to enroll: ");
         auto it_course = std::find_if(courses.begin(), courses.end(),
-                                      [&](const Course &c)
-                                      { return c.getCourseID() == courseID; });
+                                       [&](const Course& c){ return c.getCourseID() == courseID; });
 
-        if (it_course != courses.end())
-        {
-            if (it_student->getDepartment() == it_course->getDepartmentOffering())
-            {
+        if (it_course != courses.end()) {
+            if (it_student->getDepartment() == it_course->getDepartmentOffering()) {
                 it_student->enrollCourse(courseID);
                 std::cout << "Student '" << it_student->getName() << "' successfully enrolled in course '" << it_course->getTitle() << "'." << std::endl;
-            }
-            else
-            {
+            } else {
                 std::cout << "Error: Course '" << it_course->getTitle() << "' belongs to a different department than student '" << it_student->getName() << "'." << std::endl;
             }
-        }
-        else
-        {
+        } else {
             std::cout << "Error: Course with ID '" << courseID << "' not found." << std::endl;
         }
-    }
-    else
-    {
+    } else {
         std::cout << "Error: Student with ID '" << studentID << "' not found." << std::endl;
     }
 }
 
-void University::addDepartment()
-{
+void University::addDepartment() {
     std::cout << "\n--- Add New Department ---" << std::endl;
     std::string id = getStringInput("Enter Department ID (e.g., CSE001): ");
 
-    for (const auto &d : departments)
-    {
-        if (d.getDepartmentID() == id)
-        {
+    for (const auto& d : departments) {
+        if (d.getDepartmentID() == id) {
             std::cout << "Error: Department with this ID already exists." << std::endl;
             return;
         }
@@ -579,12 +515,10 @@ void University::addDepartment()
 
     std::string nameLower = name;
     std::transform(nameLower.begin(), nameLower.end(), nameLower.begin(), ::tolower);
-    for (const auto &d : departments)
-    {
+    for (const auto& d : departments) {
         std::string existingNameLower = d.getName();
         std::transform(existingNameLower.begin(), existingNameLower.end(), existingNameLower.begin(), ::tolower);
-        if (existingNameLower == nameLower)
-        {
+        if (existingNameLower == nameLower) {
             std::cout << "Error: Department with this name already exists." << std::endl;
             return;
         }
@@ -596,53 +530,43 @@ void University::addDepartment()
     std::cout << "Department added successfully!" << std::endl;
 }
 
-void University::displayAllDepartments() const
-{
-    if (departments.empty())
-    {
+void University::displayAllDepartments() const {
+    if (departments.empty()) {
         std::cout << "\nNo departments registered yet." << std::endl;
         return;
     }
     std::cout << "\n--- All Registered Departments ---" << std::endl;
-    for (const auto &department : departments)
-    {
+    for (const auto& department : departments) {
         department.displayDepartmentInfo();
     }
 }
 
-void University::searchDepartment() const
-{
+void University::searchDepartment() const {
     std::string searchTerm = getStringInput("Enter Department ID or Name to search: ");
     bool found = false;
     std::cout << "\n--- Search Results (Departments) ---" << std::endl;
-    for (const auto &department : departments)
-    {
+    for (const auto& department : departments) {
         std::string deptNameLower = department.getName();
         std::transform(deptNameLower.begin(), deptNameLower.end(), deptNameLower.begin(), ::tolower);
         std::string searchTermLower = searchTerm;
         std::transform(searchTermLower.begin(), searchTermLower.end(), searchTermLower.begin(), ::tolower);
 
-        if (department.getDepartmentID() == searchTerm || deptNameLower.find(searchTermLower) != std::string::npos)
-        {
+        if (department.getDepartmentID() == searchTerm || deptNameLower.find(searchTermLower) != std::string::npos) {
             department.displayDepartmentInfo();
             found = true;
         }
     }
-    if (!found)
-    {
+    if (!found) {
         std::cout << "No department found matching the search term." << std::endl;
     }
 }
 
-void University::addFaculty()
-{
+void University::addFaculty() {
     std::cout << "\n--- Add New Faculty ---" << std::endl;
     std::string id = getStringInput("Enter Faculty ID: ");
 
-    for (const auto &f : faculties)
-    {
-        if (f.getFacultyID() == id)
-        {
+    for (const auto& f : faculties) {
+        if (f.getFacultyID() == id) {
             std::cout << "Error: Faculty with this ID already exists." << std::endl;
             return;
         }
@@ -652,10 +576,8 @@ void University::addFaculty()
     std::string department = getStringInput("Enter Assigned Department (e.g., Computer Science and Engineering, Electrical and Electronic Engineering, Bangla, English, Textile): ");
 
     auto it_dept = std::find_if(departments.begin(), departments.end(),
-                                [&](const Department &d)
-                                { return d.getName() == department; });
-    if (it_dept == departments.end())
-    {
+                                [&](const Department& d){ return d.getName() == department; });
+    if (it_dept == departments.end()) {
         std::cout << "Error: Department '" << department << "' does not exist. Please add the department first." << std::endl;
         return;
     }
@@ -669,22 +591,48 @@ void University::addFaculty()
     it_dept->incrementFacultyCount();
 }
 
-void University::displayAllFaculties() const
-{
-    if (faculties.empty())
-    {
-        std::cout << "\nNo faculties registered yet." << std::endl;
+// --- UPDATED displayAllFaculties() ---
+void University::displayAllFaculties() const {
+    std::string deptName = getStringInput("Enter Department Name to display faculties from : ");
+
+    // Convert input department name to lowercase for case-insensitive comparison
+    std::string deptNameLower = deptName;
+    std::transform(deptNameLower.begin(), deptNameLower.end(), deptNameLower.begin(), ::tolower);
+
+    bool departmentFound = false;
+    for (const auto& d : departments) {
+        std::string currentDeptNameLower = d.getName();
+        std::transform(currentDeptNameLower.begin(), currentDeptNameLower.end(), currentDeptNameLower.begin(), ::tolower);
+        if (currentDeptNameLower == deptNameLower) {
+            departmentFound = true;
+            break;
+        }
+    }
+
+    if (!departmentFound) {
+        std::cout << "Error: Department '" << deptName << "' not found." << std::endl;
         return;
     }
-    std::cout << "\n--- All Registered Faculties ---" << std::endl;
-    for (const auto &faculty : faculties)
-    {
-        faculty.displayFacultyInfo();
+
+    bool foundFaculties = false;
+    std::cout << "\n--- All Faculties in " << deptName << " Department ---" << std::endl;
+    for (const auto& faculty : faculties) {
+        // Convert faculty's department name to lowercase for comparison
+        std::string facultyDeptLower = faculty.getDepartment();
+        std::transform(facultyDeptLower.begin(), facultyDeptLower.end(), facultyDeptLower.begin(), ::tolower);
+
+        if (facultyDeptLower == deptNameLower) {
+            faculty.displayFacultyInfo();
+            foundFaculties = true;
+        }
     }
+    if (!foundFaculties) {
+        std::cout << "No faculties registered in " << deptName << " yet." << std::endl;
+    }
+    std::cout << "---------------------------------------" << std::endl;
 }
 
-void University::searchFaculty() const
-{
+void University::searchFaculty() const {
     std::string facultyName = getStringInput("Enter Faculty Name: ");
     std::string departmentName = getStringInput("Enter Faculty's Department: ");
     bool found = false;
@@ -695,73 +643,55 @@ void University::searchFaculty() const
     std::string departmentNameLower = departmentName;
     std::transform(departmentNameLower.begin(), departmentNameLower.end(), departmentNameLower.begin(), ::tolower);
 
-    for (const auto &faculty : faculties)
-    {
+    for (const auto& faculty : faculties) {
         std::string currentFacultyNameLower = faculty.getName();
         std::transform(currentFacultyNameLower.begin(), currentFacultyNameLower.end(), currentFacultyNameLower.begin(), ::tolower);
         std::string currentDepartmentNameLower = faculty.getDepartment();
         std::transform(currentDepartmentNameLower.begin(), currentDepartmentNameLower.end(), currentDepartmentNameLower.begin(), ::tolower);
 
         if (currentFacultyNameLower.find(facultyNameLower) != std::string::npos &&
-            currentDepartmentNameLower.find(departmentNameLower) != std::string::npos)
-        {
+            currentDepartmentNameLower.find(departmentNameLower) != std::string::npos) {
             faculty.displayFacultyInfo();
             found = true;
             break;
         }
     }
-    if (!found)
-    {
+    if (!found) {
         std::cout << "No faculty found matching this name and department." << std::endl;
     }
 }
 
-void University::assignCourseToFaculty()
-{
+void University::assignCourseToFaculty() {
     std::string facultyID = getStringInput("Enter Faculty ID to assign a course: ");
     auto it_faculty = std::find_if(faculties.begin(), faculties.end(),
-                                   [&](const Faculty &f)
-                                   { return f.getFacultyID() == facultyID; });
+                                   [&](const Faculty& f){ return f.getFacultyID() == facultyID; });
 
-    if (it_faculty != faculties.end())
-    {
+    if (it_faculty != faculties.end()) {
         std::string courseID = getStringInput("Enter Course ID to assign: ");
         auto it_course = std::find_if(courses.begin(), courses.end(),
-                                      [&](const Course &c)
-                                      { return c.getCourseID() == courseID; });
+                                       [&](const Course& c){ return c.getCourseID() == courseID; });
 
-        if (it_course != courses.end())
-        {
-            if (it_faculty->getDepartment() == it_course->getDepartmentOffering())
-            {
+        if (it_course != courses.end()) {
+            if (it_faculty->getDepartment() == it_course->getDepartmentOffering()) {
                 it_faculty->assignCourse(courseID);
                 std::cout << "Course '" << it_course->getTitle() << "' successfully assigned to faculty '" << it_faculty->getName() << "'." << std::endl;
-            }
-            else
-            {
+            } else {
                 std::cout << "Error: Course '" << it_course->getTitle() << "' belongs to a different department than faculty '" << it_faculty->getName() << "'." << std::endl;
             }
-        }
-        else
-        {
+        } else {
             std::cout << "Error: Course with ID '" << courseID << "' not found." << std::endl;
         }
-    }
-    else
-    {
+    } else {
         std::cout << "Error: Faculty with ID '" << facultyID << "' not found." << std::endl;
     }
 }
 
-void University::addCourse()
-{
+void University::addCourse() {
     std::cout << "\n--- Add New Course ---" << std::endl;
     std::string id = getStringInput("Enter Course ID (e.g., CSC101): ");
 
-    for (const auto &c : courses)
-    {
-        if (c.getCourseID() == id)
-        {
+    for (const auto& c : courses) {
+        if (c.getCourseID() == id) {
             std::cout << "Error: Course with this ID already exists." << std::endl;
             return;
         }
@@ -771,10 +701,8 @@ void University::addCourse()
     std::string department = getStringInput("Enter Department Offering Course (e.g., Computer Science and Engineering, Electrical and Electronic Engineering, Bangla, English, Textile): ");
 
     auto it_dept = std::find_if(departments.begin(), departments.end(),
-                                [&](const Department &d)
-                                { return d.getName() == department; });
-    if (it_dept == departments.end())
-    {
+                                [&](const Department& d){ return d.getName() == department; });
+    if (it_dept == departments.end()) {
         std::cout << "Error: Department '" << department << "' does not exist. Please add the department first." << std::endl;
         return;
     }
@@ -786,40 +714,33 @@ void University::addCourse()
     std::cout << "Course added successfully!" << std::endl;
 }
 
-void University::displayAllCourses() const
-{
-    if (courses.empty())
-    {
+void University::displayAllCourses() const {
+    if (courses.empty()) {
         std::cout << "\nNo courses registered yet." << std::endl;
         return;
     }
     std::cout << "\n--- All Registered Courses ---" << std::endl;
-    for (const auto &course : courses)
-    {
+    for (const auto& course : courses) {
         course.displayCourseInfo();
     }
 }
 
-void University::searchCourse() const
-{
+void University::searchCourse() const {
     std::string searchTerm = getStringInput("Enter Course ID or Title to search: ");
     bool found = false;
     std::cout << "\n--- Search Results (Courses) ---" << std::endl;
-    for (const auto &course : courses)
-    {
+    for (const auto& course : courses) {
         std::string courseTitleLower = course.getTitle();
         std::transform(courseTitleLower.begin(), courseTitleLower.end(), courseTitleLower.begin(), ::tolower);
         std::string searchTermLower = searchTerm;
         std::transform(searchTermLower.begin(), searchTermLower.end(), searchTermLower.begin(), ::tolower);
 
-        if (course.getCourseID() == searchTerm || courseTitleLower.find(searchTermLower) != std::string::npos)
-        {
+        if (course.getCourseID() == searchTerm || courseTitleLower.find(searchTermLower) != std::string::npos) {
             course.displayCourseInfo();
             found = true;
         }
     }
-    if (!found)
-    {
+    if (!found) {
         std::cout << "No course found matching the search term." << std::endl;
     }
 }
@@ -827,8 +748,7 @@ void University::searchCourse() const
 // --- New University Class Method Implementations ---
 
 // Library Management
-void University::displayLibraryMenu() const
-{
+void University::displayLibraryMenu() const {
     std::cout << "\n--- Library Management ---" << std::endl;
     std::cout << "1. Display All Books" << std::endl;
     std::cout << "2. Search Book by Title" << std::endl;
@@ -838,15 +758,12 @@ void University::displayLibraryMenu() const
     std::cout << "--------------------------" << std::endl;
 }
 
-void University::manageLibrary()
-{
+void University::manageLibrary() {
     int libraryChoice;
-    do
-    {
+    do {
         displayLibraryMenu();
         libraryChoice = getIntegerInput("Enter your choice: ");
-        switch (libraryChoice)
-        {
+        switch (libraryChoice) {
         case 1:
             universityLibrary.displayAllBooks();
             break;
@@ -870,8 +787,7 @@ void University::manageLibrary()
 }
 
 // Cafeteria Management
-void University::displayCafeteriaMenu() const
-{
+void University::displayCafeteriaMenu() const {
     std::cout << "\n--- Cafeteria Management ---" << std::endl;
     std::cout << "1. Display All Menu Items" << std::endl;
     std::cout << "2. Search Menu Item by Name" << std::endl;
@@ -880,15 +796,12 @@ void University::displayCafeteriaMenu() const
     std::cout << "----------------------------" << std::endl;
 }
 
-void University::manageCafeteria()
-{
+void University::manageCafeteria() {
     int cafeteriaChoice;
-    do
-    {
+    do {
         displayCafeteriaMenu();
         cafeteriaChoice = getIntegerInput("Enter your choice: ");
-        switch (cafeteriaChoice)
-        {
+        switch (cafeteriaChoice) {
         case 1:
             universityCafeteria.displayAllMenuItems();
             break;
@@ -908,8 +821,7 @@ void University::manageCafeteria()
     } while (cafeteriaChoice != 0);
 }
 
-void University::displayMainMenu() const
-{
+void University::displayMainMenu() const {
     std::cout << "\n===== University Management System =====" << std::endl;
     std::cout << "1. Admission Management" << std::endl;
     std::cout << "2. Student Management" << std::endl;
@@ -917,33 +829,30 @@ void University::displayMainMenu() const
     std::cout << "4. Faculty Management" << std::endl;
     std::cout << "5. Course Management" << std::endl;
     // New Options
-    std::cout << "6. Library Management" << std::endl;   // New
+    std::cout << "6. Library Management" << std::endl; // New
     std::cout << "7. Cafeteria Management" << std::endl; // New
     std::cout << "0. Exit" << std::endl;
     std::cout << "========================================" << std::endl;
 }
 
-void University::displayAdmissionMenu() const
-{
+void University::displayAdmissionMenu() const {
     std::cout << "\n--- Admission Management ---" << std::endl;
     std::cout << "1. Submit New Admission Application" << std::endl;
     std::cout << "0. Back to Main Menu" << std::endl;
     std::cout << "--------------------------" << std::endl;
 }
 
-void University::displayStudentMenu() const
-{
+void University::displayStudentMenu() const {
     std::cout << "\n--- Student Management ---" << std::endl;
     std::cout << "1. Add New Student" << std::endl;
-    std::cout << "2. Display All Students" << std::endl;
+    std::cout << "2. Display All Students " << std::endl; // মেনুর নাম আপডেট করা হয়েছে
     std::cout << "3. Search Student by ID and Department" << std::endl;
     std::cout << "4. Enroll Student in Course" << std::endl;
     std::cout << "0. Back to Main Menu" << std::endl;
     std::cout << "--------------------------" << std::endl;
 }
 
-void University::displayDepartmentMenu() const
-{
+void University::displayDepartmentMenu() const {
     std::cout << "\n--- Department Management ---" << std::endl;
     std::cout << "1. Add New Department" << std::endl;
     std::cout << "2. Display All Departments" << std::endl;
@@ -952,19 +861,17 @@ void University::displayDepartmentMenu() const
     std::cout << "-----------------------------" << std::endl;
 }
 
-void University::displayFacultyMenu() const
-{
+void University::displayFacultyMenu() const {
     std::cout << "\n--- Faculty Management ---" << std::endl;
     std::cout << "1. Add New Faculty" << std::endl;
-    std::cout << "2. Display All Faculties" << std::endl;
+    std::cout << "2. Display All Faculties " << std::endl; // মেনুর নাম আপডেট করা হয়েছে
     std::cout << "3. Search Faculty by Name and Department" << std::endl;
     std::cout << "4. Assign Course to Faculty" << std::endl;
     std::cout << "0. Back to Main Menu" << std::endl;
     std::cout << "--------------------------" << std::endl;
 }
 
-void University::displayCourseMenu() const
-{
+void University::displayCourseMenu() const {
     std::cout << "\n--- Course Management ---" << std::endl;
     std::cout << "1. Add New Course" << std::endl;
     std::cout << "2. Display All Courses" << std::endl;
