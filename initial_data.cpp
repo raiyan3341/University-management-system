@@ -5,15 +5,18 @@
 #include <iostream> // For output if needed, though not strictly for data population
 #include <vector>   // Ensure vector is included if not already by university_classes.h
 #include <string>   // Ensure string is included
-#include <iomanip>  // For std::setw, std::setfill if used for ID formatting (not directly for manual add)
+#include <iomanip>  // For setw, setfill if used for ID formatting (not directly for manual add)
+#include <algorithm> // For transform
+
+using namespace std; // Added for easier access to standard library components
 
 void populateHardcodedData(
-    std::vector<Student>& students,
-    std::vector<Department>& departments,
-    std::vector<Faculty>& faculties,
-    std::vector<Course>& courses,
-    const std::vector<Course>& availableCourses, // Kept for signature compatibility
-    const std::vector<Faculty>& availableFaculties // Kept for signature compatibility
+    vector<Student>& students,
+    vector<Department>& departments,
+    vector<Faculty>& faculties,
+    vector<Course>& courses,
+    const vector<Course>& availableCourses, // Kept for signature compatibility
+    const vector<Faculty>& availableFaculties // Kept for signature compatibility
 ) {
     // --- Add Departments ---
     // Ensure these department names match exactly what's used in your University class methods.

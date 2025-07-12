@@ -3,11 +3,14 @@
 
 #include "university_classes.h" // Include the header with University class definition
 #include "initial_data.h"       // Include the header with data population function declarations
+#include <iostream> // For output
+
+using namespace std; // Added for easier access to standard library components
 
 void University::loadInitialData() {
 
     populateHardcodedData(students, departments, faculties, courses,
-                          std::vector<Course>(), std::vector<Faculty>());
+                          vector<Course>(), vector<Faculty>());
     populateLibraryData(universityLibrary);
     populateCafeteriaData(universityCafeteria);
 }
@@ -36,10 +39,10 @@ void University::run()
                     addAdmission();
                     break;
                 case 0:
-                    std::cout << "Returning to Main Menu..." << std::endl;
+                    cout << "Returning to Main Menu..." << endl;
                     break;
                 default:
-                    std::cout << "Invalid choice. Please try again." << std::endl;
+                    cout << "Invalid choice. Please try again." << endl;
                     break;
                 }
             } while (admissionChoice != 0);
@@ -65,10 +68,10 @@ void University::run()
                     enrollStudentInCourse();
                     break;
                 case 0:
-                    std::cout << "Returning to Main Menu..." << std::endl;
+                    cout << "Returning to Main Menu..." << endl;
                     break;
                 default:
-                    std::cout << "Invalid choice. Please try again." << std::endl;
+                    cout << "Invalid choice. Please try again." << endl;
                     break;
                 }
             } while (studentChoice != 0);
@@ -91,10 +94,10 @@ void University::run()
                     searchDepartment();
                     break;
                 case 0:
-                    std::cout << "Returning to Main Menu..." << std::endl;
+                    cout << "Returning to Main Menu..." << endl;
                     break;
                 default:
-                    std::cout << "Invalid choice. Please try again." << std::endl;
+                    cout << "Invalid choice. Please try again." << endl;
                     break;
                 }
             } while (departmentChoice != 0);
@@ -120,10 +123,10 @@ void University::run()
                     assignCourseToFaculty();
                     break;
                 case 0:
-                    std::cout << "Returning to Main Menu..." << std::endl;
+                    cout << "Returning to Main Menu..." << endl;
                     break;
                 default:
-                    std::cout << "Invalid choice. Please try again." << std::endl;
+                    cout << "Invalid choice. Please try again." << endl;
                     break;
                 }
             } while (facultyChoice != 0);
@@ -146,10 +149,10 @@ void University::run()
                     searchCourse();
                     break;
                 case 0:
-                    std::cout << "Returning to Main Menu..." << std::endl;
+                    cout << "Returning to Main Menu..." << endl;
                     break;
                 default:
-                    std::cout << "Invalid choice. Please try again." << std::endl;
+                    cout << "Invalid choice. Please try again." << endl;
                     break;
                 }
             } while (courseChoice != 0);
@@ -161,10 +164,10 @@ void University::run()
             manageCafeteria(); 
             break;
         case 0:
-            std::cout << "Exiting University Management System. Goodbye!" << std::endl;
+            cout << "Exiting University Management System. Goodbye!" << endl;
             break;
         default:
-            std::cout << "Invalid choice. Please try again." << std::endl;
+            cout << "Invalid choice. Please try again." << endl;
             break;
         }
     } while (choice != 0);

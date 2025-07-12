@@ -7,33 +7,35 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm> // For std::find_if and std::transform
-#include <limits>    // For std::numeric_limits
+#include <algorithm> // For find_if and transform
+#include <limits>    // For numeric_limits
+
+using namespace std; // Added for easier access to standard library components
 
 // These helpers are common and can be declared here to be accessible by multiple classes/files.
 void clearInputBuffer();
-std::string getStringInput(const std::string &prompt);
-int getIntegerInput(const std::string &prompt);
+string getStringInput(const string &prompt);
+int getIntegerInput(const string &prompt);
 
 // --- Class Declarations ---
 
 class Book
 {
 private:
-    std::string bookID;
-    std::string title;
-    std::string author;
-    std::string genre;
+    string bookID;
+    string title;
+    string author;
+    string genre;
     bool isAvailable; // true if available, false if borrowed
 
 public:
-    Book(std::string id = "", std::string t = "", std::string auth = "",
-         std::string g = "", bool available = true);
+    Book(string id = "", string t = "", string auth = "",
+         string g = "", bool available = true);
 
-    std::string getBookID() const;
-    std::string getTitle() const;
-    std::string getAuthor() const;
-    std::string getGenre() const;
+    string getBookID() const;
+    string getTitle() const;
+    string getAuthor() const;
+    string getGenre() const;
     bool getAvailability() const;
 
     void setAvailability(bool available);
@@ -44,7 +46,7 @@ public:
 class Library
 {
 private:
-    std::vector<Book> books;
+    vector<Book> books;
 
 public:
     void addBook(const Book &book);
@@ -59,18 +61,18 @@ public:
 class FoodItem
 {
 private:
-    std::string itemID;
-    std::string name;
+    string itemID;
+    string name;
     double price;
-    std::string category; // e.g., "Main Course", "Snack", "Beverage"
+    string category; // e.g., "Main Course", "Snack", "Beverage"
 
 public:
-    FoodItem(std::string id = "", std::string n = "", double p = 0.0, std::string cat = "");
+    FoodItem(string id = "", string n = "", double p = 0.0, string cat = "");
 
-    std::string getItemID() const;
-    std::string getName() const;
+    string getItemID() const;
+    string getName() const;
     double getPrice() const;
-    std::string getCategory() const;
+    string getCategory() const;
 
     void displayFoodItemInfo() const;
 };
@@ -79,7 +81,7 @@ public:
 class Cafeteria
 {
 private:
-    std::vector<FoodItem> menuItems;
+    vector<FoodItem> menuItems;
 
 public:
     void addMenuItem(const FoodItem &item);
@@ -92,61 +94,61 @@ public:
 class Student
 {
 private:
-    std::string studentID;
-    std::string name;
-    std::string dateOfBirth;
-    std::string address;
-    std::string phoneNumber;
-    std::string email;
-    std::string departmentEnrolled;
-    std::vector<std::string> enrolledCourseIDs;
+    string studentID;
+    string name;
+    string dateOfBirth;
+    string address;
+    string phoneNumber;
+    string email;
+    string departmentEnrolled;
+    vector<string> enrolledCourseIDs;
     double CGPA;
-    std::string hscResult;
-    std::string sscResult;
+    string hscResult;
+    string sscResult;
 
 public:
-    Student(std::string id = "", std::string n = "", std::string dob = "",
-            std::string addr = "", std::string phone = "", std::string mail = "",
-            std::string dept = "", double gpa = 0.0,
-            std::string hscR = "", std::string sscR = "");
+    Student(string id = "", string n = "", string dob = "",
+            string addr = "", string phone = "", string mail = "",
+            string dept = "", double gpa = 0.0,
+            string hscR = "", string sscR = "");
 
-    std::string getStudentID() const;
-    std::string getName() const;
-    std::string getDateOfBirth() const;
-    std::string getAddress() const;
-    std::string getPhoneNumber() const;
-    std::string getEmail() const;
-    std::string getDepartment() const; // Ensure this is available
+    string getStudentID() const;
+    string getName() const;
+    string getDateOfBirth() const;
+    string getAddress() const;
+    string getPhoneNumber() const;
+    string getEmail() const;
+    string getDepartment() const; // Ensure this is available
     double getCGPA() const;
-    const std::vector<std::string> &getEnrolledCourseIDs() const;
-    std::string getHSCResult() const;
-    std::string getSSCResult() const;
+    const vector<string> &getEnrolledCourseIDs() const;
+    string getHSCResult() const;
+    string getSSCResult() const;
 
     void setCGPA(double gpa);
-    void enrollCourse(const std::string &courseID);
+    void enrollCourse(const string &courseID);
     void displayStudentInfo() const;
 };
 
 class Department
 {
 private:
-    std::string departmentID;
-    std::string name;
-    std::string headOfDepartment;
+    string departmentID;
+    string name;
+    string headOfDepartment;
     int totalFacultyCount;
     int totalStudentCount;
 
 public:
-    Department(std::string id = "", std::string n = "", std::string hod = "",
+    Department(string id = "", string n = "", string hod = "",
                int facultyCount = 0, int studentCount = 0);
 
-    std::string getDepartmentID() const;
-    std::string getName() const; // Ensure this is available
-    std::string getHeadOfDepartment() const;
+    string getDepartmentID() const;
+    string getName() const; // Ensure this is available
+    string getHeadOfDepartment() const;
     int getTotalFacultyCount() const;
     int getTotalStudentCount() const;
 
-    void setHeadOfDepartment(const std::string &hod);
+    void setHeadOfDepartment(const string &hod);
     void incrementFacultyCount();
     void decrementFacultyCount();
     void incrementStudentCount();
@@ -157,46 +159,46 @@ public:
 class Faculty
 {
 private:
-    std::string facultyID;
-    std::string name;
-    std::string departmentAssigned;
-    std::string designation;
-    std::string email;
-    std::vector<std::string> coursesTaughtIDs;
+    string facultyID;
+    string name;
+    string departmentAssigned;
+    string designation;
+    string email;
+    vector<string> coursesTaughtIDs;
 
 public:
-    Faculty(std::string id = "", std::string n = "", std::string dept = "",
-            std::string desig = "", std::string mail = "");
+    Faculty(string id = "", string n = "", string dept = "",
+            string desig = "", string mail = "");
 
-    std::string getFacultyID() const;
-    std::string getName() const;
-    std::string getDepartment() const; // Ensure this is available
-    std::string getDesignation() const;
-    std::string getEmail() const;
-    const std::vector<std::string> &getCoursesTaughtIDs() const;
+    string getFacultyID() const;
+    string getName() const;
+    string getDepartment() const; // Ensure this is available
+    string getDesignation() const;
+    string getEmail() const;
+    const vector<string> &getCoursesTaughtIDs() const;
 
-    void assignCourse(const std::string &courseID);
+    void assignCourse(const string &courseID);
     void displayFacultyInfo() const;
 };
 
 class Course
 {
 private:
-    std::string courseID;
-    std::string title;
-    std::string departmentOffering;
+    string courseID;
+    string title;
+    string departmentOffering;
     int credits;
-    std::string courseDescription;
+    string courseDescription;
 
 public:
-    Course(std::string id = "", std::string t = "", std::string dept = "",
-           int c = 0, std::string desc = "");
+    Course(string id = "", string t = "", string dept = "",
+           int c = 0, string desc = "");
 
-    std::string getCourseID() const;
-    std::string getTitle() const;
-    std::string getDepartmentOffering() const;
+    string getCourseID() const;
+    string getTitle() const;
+    string getDepartmentOffering() const;
     int getCredits() const;
-    std::string getCourseDescription() const;
+    string getCourseDescription() const;
 
     void displayCourseInfo() const;
 };
@@ -205,10 +207,10 @@ public:
 class University
 {
 private:
-    std::vector<Student> students;
-    std::vector<Department> departments;
-    std::vector<Faculty> faculties;
-    std::vector<Course> courses;
+    vector<Student> students;
+    vector<Department> departments;
+    vector<Faculty> faculties;
+    vector<Course> courses;
     Library universityLibrary;
     Cafeteria universityCafeteria;
 
