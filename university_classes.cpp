@@ -2,14 +2,11 @@
 // Defines the implementations for Student, Department, Faculty, Course,
 // Book, Library, FoodItem, Cafeteria, and University classes.
 
-#include "university_classes.h" // Include the header with class declarations
-#include <iomanip> // Required for fixed and setprecision
-#include <algorithm> // Required for transform
-#include <limits>    // Required for numeric_limits
-
-using namespace std; // Added for easier access to standard library components
-
-// --- Helper Functions Implementations ---
+#include "university_classes.h"
+#include <iomanip>
+#include <algorithm>
+#include <limits>
+using namespace std;
 
 void clearInputBuffer() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -38,7 +35,6 @@ int getIntegerInput(const string& prompt) {
     }
 }
 
-// --- Class Implementations ---
 
 // Student Class
 Student::Student(string id, string n, string dob,
@@ -597,8 +593,6 @@ void University::addFaculty() {
 // --- UPDATED displayAllFaculties() ---
 void University::displayAllFaculties() const {
     string deptName = getStringInput("Enter Department Name to display faculties from : ");
-
-    // Convert input department name to lowercase for case-insensitive comparison
     string deptNameLower = deptName;
     transform(deptNameLower.begin(), deptNameLower.end(), deptNameLower.begin(), ::tolower);
 
@@ -620,7 +614,6 @@ void University::displayAllFaculties() const {
     bool foundFaculties = false;
     cout << "\n--- All Faculties in " << deptName << " Department ---" << endl;
     for (const auto& faculty : faculties) {
-        // Convert faculty's department name to lowercase for comparison
         string facultyDeptLower = faculty.getDepartment();
         transform(facultyDeptLower.begin(), facultyDeptLower.end(), facultyDeptLower.begin(), ::tolower);
 
@@ -748,8 +741,6 @@ void University::searchCourse() const {
     }
 }
 
-// --- New University Class Method Implementations ---
-
 // Library Management
 void University::displayLibraryMenu() const {
     cout << "\n--- Library Management ---" << endl;
@@ -831,9 +822,8 @@ void University::displayMainMenu() const {
     cout << "3. Department Management" << endl;
     cout << "4. Faculty Management" << endl;
     cout << "5. Course Management" << endl;
-    // New Options
-    cout << "6. Library Management" << endl; // New
-    cout << "7. Cafeteria Management" << endl; // New
+    cout << "6. Library Management" << endl;
+    cout << "7. Cafeteria Management" << endl;
     cout << "0. Exit" << endl;
     cout << "========================================" << endl;
 }
@@ -848,7 +838,7 @@ void University::displayAdmissionMenu() const {
 void University::displayStudentMenu() const {
     cout << "\n--- Student Management ---" << endl;
     cout << "1. Add New Student" << endl;
-    cout << "2. Display All Students " << endl; // মেনুর নাম আপডেট করা হয়েছে
+    cout << "2. Display All Students " << endl;
     cout << "3. Search Student by ID and Department" << endl;
     cout << "4. Enroll Student in Course" << endl;
     cout << "0. Back to Main Menu" << endl;
@@ -867,7 +857,7 @@ void University::displayDepartmentMenu() const {
 void University::displayFacultyMenu() const {
     cout << "\n--- Faculty Management ---" << endl;
     cout << "1. Add New Faculty" << endl;
-    cout << "2. Display All Faculties " << endl; // মেনুর নাম আপডেট করা হয়েছে
+    cout << "2. Display All Faculties " << endl;
     cout << "3. Search Faculty by Name and Department" << endl;
     cout << "4. Assign Course to Faculty" << endl;
     cout << "0. Back to Main Menu" << endl;

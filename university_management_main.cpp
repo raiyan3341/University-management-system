@@ -1,14 +1,12 @@
 // university_management_main.cpp
 // Main program file for the University Management System.
 
-#include "university_classes.h" // Include the header with University class definition
-#include "initial_data.h"       // Include the header with data population function declarations
-#include <iostream> // For output
-
-using namespace std; // Added for easier access to standard library components
+#include "university_classes.h"
+#include "initial_data.h"
+#include <iostream>
+using namespace std;
 
 void University::loadInitialData() {
-
     populateHardcodedData(students, departments, faculties, courses,
                           vector<Course>(), vector<Faculty>());
     populateLibraryData(universityLibrary);
@@ -17,7 +15,7 @@ void University::loadInitialData() {
 
 void University::run()
 {
-    loadInitialData(); // Load all initial data at startup
+    loadInitialData();
 
     int choice;
     do

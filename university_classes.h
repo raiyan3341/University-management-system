@@ -7,12 +7,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm> // For find_if and transform
-#include <limits>    // For numeric_limits
+#include <algorithm>
+#include <limits>
+using namespace std;
 
-using namespace std; // Added for easier access to standard library components
-
-// These helpers are common and can be declared here to be accessible by multiple classes/files.
 void clearInputBuffer();
 string getStringInput(const string &prompt);
 int getIntegerInput(const string &prompt);
@@ -26,7 +24,7 @@ private:
     string title;
     string author;
     string genre;
-    bool isAvailable; // true if available, false if borrowed
+    bool isAvailable;
 
 public:
     Book(string id = "", string t = "", string auth = "",
@@ -54,7 +52,6 @@ public:
     void searchBookByTitle() const;
     void searchBookByAuthor() const;
     void searchBookByGenre() const;
-    // Add functions for borrowing/returning if desired later
 };
 
 // New: FoodItem Class
@@ -64,11 +61,10 @@ private:
     string itemID;
     string name;
     double price;
-    string category; // e.g., "Main Course", "Snack", "Beverage"
+    string category;
 
 public:
     FoodItem(string id = "", string n = "", double p = 0.0, string cat = "");
-
     string getItemID() const;
     string getName() const;
     double getPrice() const;
@@ -88,7 +84,6 @@ public:
     void displayAllMenuItems() const;
     void searchMenuItemByName() const;
     void searchMenuItemByCategory() const;
-    // Add functions for ordering/payment if desired later
 };
 
 class Student
@@ -118,7 +113,7 @@ public:
     string getAddress() const;
     string getPhoneNumber() const;
     string getEmail() const;
-    string getDepartment() const; // Ensure this is available
+    string getDepartment() const;
     double getCGPA() const;
     const vector<string> &getEnrolledCourseIDs() const;
     string getHSCResult() const;
@@ -140,10 +135,10 @@ private:
 
 public:
     Department(string id = "", string n = "", string hod = "",
-               int facultyCount = 0, int studentCount = 0);
+    int facultyCount = 0, int studentCount = 0);
 
     string getDepartmentID() const;
-    string getName() const; // Ensure this is available
+    string getName() const;
     string getHeadOfDepartment() const;
     int getTotalFacultyCount() const;
     int getTotalStudentCount() const;
@@ -172,7 +167,7 @@ public:
 
     string getFacultyID() const;
     string getName() const;
-    string getDepartment() const; // Ensure this is available
+    string getDepartment() const;
     string getDesignation() const;
     string getEmail() const;
     const vector<string> &getCoursesTaughtIDs() const;
@@ -203,7 +198,7 @@ public:
     void displayCourseInfo() const;
 };
 
-// In university_classes.h, inside the University class
+
 class University
 {
 private:
@@ -217,10 +212,9 @@ private:
     void loadInitialData();
 
 public:
-    // Methods for each management type
     void addAdmission();
     void addStudent();
-    void displayAllStudents() const; // Modified to ask for department
+    void displayAllStudents() const;
     void searchStudent() const;
     void enrollStudentInCourse();
 
@@ -240,7 +234,7 @@ public:
     void manageLibrary();
     void displayLibraryMenu() const;
 
-    void manageCafeteria(); // New function to handle cafeteria menu and operations
+    void manageCafeteria();
     void displayCafeteriaMenu() const;
 
     // Main program flow
@@ -250,7 +244,7 @@ public:
     void displayDepartmentMenu() const;
     void displayFacultyMenu() const;
     void displayCourseMenu() const;
-    void run(); // Defined in university_management_main.cpp
+    void run();
 };
 
-#endif // UNIVERSITY_CLASSES_H
+#endif

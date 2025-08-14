@@ -2,25 +2,23 @@
 // Defines the function to populate hardcoded initial data.
 
 #include "initial_data.h"
-#include <iostream> // For output if needed, though not strictly for data population
-#include <vector>   // Ensure vector is included if not already by university_classes.h
-#include <string>   // Ensure string is included
-#include <iomanip>  // For setw, setfill if used for ID formatting (not directly for manual add)
-#include <algorithm> // For transform
+#include <iostream>
+#include <vector>
+#include <string>
+#include <iomanip>
+#include <algorithm>
 
-using namespace std; // Added for easier access to standard library components
+using namespace std;
 
 void populateHardcodedData(
     vector<Student>& students,
     vector<Department>& departments,
     vector<Faculty>& faculties,
     vector<Course>& courses,
-    const vector<Course>& availableCourses, // Kept for signature compatibility
-    const vector<Faculty>& availableFaculties // Kept for signature compatibility
+    const vector<Course>& availableCourses,
+    const vector<Faculty>& availableFaculties
 ) {
-    // --- Add Departments ---
-    // Ensure these department names match exactly what's used in your University class methods.
-    // Assuming Department constructor initializes counts to 0.
+
     departments.emplace_back("CSE001", "Computer Science and Engineering", "Dr. A. Rahman", 0, 0);
     departments.emplace_back("EEE001", "Electrical and Electronic Engineering", "Prof. S. Islam", 0, 0);
     departments.emplace_back("BAN001", "Bangla", "Dr. M. Akter", 0, 0);
@@ -250,14 +248,8 @@ void populateHardcodedData(
     faculties.emplace_back("TEXF014", "Mr. Alamin Miah", "Textile Engineering", "Assistant Professor", "alamin.miah@textile.edu");
     faculties.emplace_back("TEXF015", "Ms. Tanjila Haque", "Textile Engineering", "Lecturer", "tanjila.haque@textile.edu");
 
-    // --- Update Department Counts ---
-    // This loop ensures that the totalStudentCount and totalFacultyCount in each Department object
-    // are accurate based on the manually added students and faculties.
-    // Assuming Department constructor correctly initializes totalStudentCount and totalFacultyCount to 0.
+
     for (auto& dept : departments) {
-        // Since Department objects are created with initial counts (0,0),
-        // we can directly increment them. No explicit resetCounts() needed here
-        // if your constructor correctly initializes them to zero.
         for (const auto& student : students) {
             if (student.getDepartment() == dept.getName()) {
                 dept.incrementStudentCount();
