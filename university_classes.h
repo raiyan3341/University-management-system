@@ -1,6 +1,3 @@
-// university_classes.h
-// Defines the declarations for Student, Department, Faculty, Course, and University classes.
-
 #ifndef UNIVERSITY_CLASSES_H
 #define UNIVERSITY_CLASSES_H
 

@@ -1,13 +1,9 @@
-// initial_data.cpp
-// Defines the function to populate hardcoded initial data.
-
 #include "initial_data.h"
 #include <iostream>
 #include <vector>
 #include <string>
 #include <iomanip>
 #include <algorithm>
-
 using namespace std;
 
 void populateHardcodedData(
@@ -50,7 +46,7 @@ void populateHardcodedData(
     courses.emplace_back("TEX101", "Textile Raw Materials", "Textile Engineering", 3, "Properties and processing of natural and synthetic fibers.");
     courses.emplace_back("TEX201", "Fabric Manufacturing", "Textile Engineering", 3, "Principles of weaving, knitting, and non-woven fabric production.");
 
-    // --- Add Students (20 per Department) ---
+
     // Computer Science and Engineering Students
     students.emplace_back("CSE2024001", "Ali Ahmed", "15-03-2005", "123 Green Rd, Dhaka", "01711111111", "ali.ahmed@cse.edu", "Computer Science and Engineering", 3.85, "4.90", "5.00");
     students.emplace_back("CSE2024002", "Fahim Khan", "22-07-2004", "456 Main St, Chittagong", "01812345678", "fahim.khan@cse.edu", "Computer Science and Engineering", 3.70, "4.85", "4.95");
@@ -162,7 +158,7 @@ void populateHardcodedData(
     students.emplace_back("TEX2024020", "Laboni Akter", "20-08-2004", "200 Loom St, Brahmanbaria", "01650000020", "laboni.akter@textile.edu", "Textile Engineering", 3.69, "4.79", "4.89");
 
 
-    // --- Add Faculties (15 per Department) ---
+    // --- Add Faculties ---
     // Computer Science and Engineering Faculties
     faculties.emplace_back("CSEF001", "Dr. Zobair Khan", "Computer Science and Engineering", "Professor", "zobair.khan@cse.edu");
     faculties.emplace_back("CSEF002", "Ms. Roksana Islam", "Computer Science and Engineering", "Assistant Professor", "roksana.islam@cse.edu");
@@ -265,7 +261,6 @@ void populateHardcodedData(
 }
 
 void populateLibraryData(Library& library) {
-    // Add specific initial books
     library.addBook(Book("B001", "The Alchemist", "Paulo Coelho", "Fiction", true));
     library.addBook(Book("B002", "Sapiens: A Brief History of Humankind", "Yuval Noah Harari", "History", true));
     library.addBook(Book("B003", "1984", "George Orwell", "Dystopian", true));
@@ -284,7 +279,6 @@ void populateLibraryData(Library& library) {
 }
 
 void populateCafeteriaData(Cafeteria& cafeteria) {
-    // Add specific initial menu items
     cafeteria.addMenuItem(FoodItem("F001", "Chicken Biriyani", 180.00, "Main Course"));
     cafeteria.addMenuItem(FoodItem("F002", "Vegetable Curry with Rice", 120.00, "Main Course"));
     cafeteria.addMenuItem(FoodItem("F003", "Beef Burger", 150.00, "Fast Food"));

@@ -1,6 +1,3 @@
-// initial_data.h
-// Declares the function to populate hardcoded initial data.
-
 #ifndef INITIAL_DATA_H
 #define INITIAL_DATA_H
 #include "university_classes.h" 

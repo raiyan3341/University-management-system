@@ -1,6 +1,3 @@
-// university_management_main.cpp
-// Main program file for the University Management System.
-
 #include "university_classes.h"
 #include "initial_data.h"
 #include <iostream>

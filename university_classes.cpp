@@ -1,7 +1,3 @@
-// university_classes.cpp
-// Defines the implementations for Student, Department, Faculty, Course,
-// Book, Library, FoodItem, Cafeteria, and University classes.
-
 #include "university_classes.h"
 #include <iomanip>
 #include <algorithm>
